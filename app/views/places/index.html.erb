@@ -1,0 +1,18 @@
+<!-- app/views/places/index.html.erb -->
+<div id="map" style="height: 400px;"></div>
+
+<script>
+  // Initialize the map
+  var map = L.map('map').setView([51.505, -0.09], 13);
+
+  // Add OpenStreetMap tiles to the map
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  <% @places.each do |place| %>
+    // Add markers for each place on the map
+    L.marker([<%= place.latitude %>, <%= place.longitude %>]).addTo(map)
+      .bindPopup("<%= place.name %>");
+  <% end %>
+</script>
